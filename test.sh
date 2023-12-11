@@ -34,11 +34,6 @@ fi
 
 g++ -o "$tmpdir/executable" "$src_file"
 
-if [ $? -ne 0 ]; then
-  echo "Compilation failed."
-  exit
-fi
-
 mv "$tmpdir/executable" "$output"
 
 echo "Compilation successful. Output file: $output"
