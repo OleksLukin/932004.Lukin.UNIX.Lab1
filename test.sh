@@ -34,16 +34,12 @@ if [ -z "$output" ]; then
     exit
 fi
 
-mv "$src_file" "/$tmpdir"
+cp "$src_file" "$tmpdir"
 
-cd "$tmpdir" || exit 1
+cd "$tmpdir"
 
 g++ -o "executable" "$src_file"
 
-mv "executable" "$output"
-
-mv "$src_file" "$path"
-
-mv "$output" "$path"
+mv "executable" "$path/$output"
 
 echo "Compilation successful. Output file: $output"
