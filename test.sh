@@ -2,6 +2,8 @@
 
 tmpdir=$(mktemp -d)
 
+path=$(pwd)
+
 cleanup() {
   rm -rf "$tmpdir"
 }
@@ -32,8 +34,16 @@ if [ -z "$output" ]; then
     exit
 fi
 
-g++ -o "$tmpdir/executable" "$src_file"
+mv "$src_file" "/$tmpdir"
 
-mv "$tmpdir/executable" "$output"
+cd "$tmpdir" || exit 1
+
+g++ -o "executable" "$src_file"
+
+mv "executable" "$output"
+
+mv "$src_file" "$path"
+
+mv "$output" "$path"
 
 echo "Compilation successful. Output file: $output"
